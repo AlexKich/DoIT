@@ -17,6 +17,7 @@ html {
 }
 
 body {
+  height: 100%;
   padding-top: 60px;
 }
 
@@ -84,6 +85,7 @@ p {
 /* footer */
 
 footer {
+
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid $grayMediumLight;
@@ -91,7 +93,7 @@ footer {
   a {
     color: $gray;
     &:hover {
-      color: $grayDarker;
+      color: greenyellow;
     }
   }
   small {

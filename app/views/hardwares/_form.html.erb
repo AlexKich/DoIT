@@ -1,0 +1,108 @@
+<div class="row-fluid">
+<%= form_for(@hardware) do |f| %>
+  <% if @hardware.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hardware.errors.count, "error") %> prohibited this hardware from being saved:</h2>
+
+      <ul>
+      <% @hardware.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<span class="span5">
+  <div class="field">
+    <%= f.label :inv_num %><br>
+    <%= f.text_field :inv_num %>
+  </div>
+  <div class="field">
+    <%= f.label :company_id %><br>
+    <%= f.collection_select(:company_id, Company.order('company_name ASC'), :id, :company_name, include_blank: true) %>
+
+  </div>
+  <div class="field">
+    <%= f.label :department_id %><br>
+    <%= f.collection_select(:department_id, Department.order('department_name ASC'), :id, :department_name, include_blank: true) %>
+
+  </div>
+
+   <div class="field">
+     <%= f.label :coworker_id %><br>
+     <%= f.collection_select(:coworker_id, Coworker.order('coworker_name ASC'), :id, :coworker_name, include_blank: true) %>
+
+   </div>
+
+  <div class="field">
+
+    <%= f.label :by_doc %><br />
+    <%= f.file_field :by_doc %>
+
+  </div>
+  <div class="field">
+
+  <%= f.label :Image %><br/>
+  <%= f.file_field 'file' %>
+  <%= f.submit "Upload" %>
+ 
+  </div>
+
+  <div class="field">
+    <%= f.label :by_price %><br>
+    <%= f.text_field :by_price %>
+  </div>
+  <div class="field">
+    <%= f.label :model_name %><br>
+    <%= f.text_field :model_name %>
+  </div>
+  <div class="field">
+    <%= f.label :notebook %><br>
+    <%= f.check_box :notebook %>
+  </div>
+  <div class="field">
+    <%= f.label :cpu %><br>
+    <%= f.text_field :cpu %>
+  </div>
+
+  </span>
+  <span class="span5">
+  <div class="field">
+    <%= f.label :memory %><br>
+    <%= f.text_field :memory %>
+  </div>
+  <div class="field">
+    <%= f.label :hdd %><br>
+    <%= f.text_field :hdd %>
+  </div>
+  <div class="field">
+    <%= f.label :keyboard %><br>
+    <%= f.text_field :keyboard %>
+  </div>
+  <div class="field">
+    <%= f.label :mouse %><br>
+    <%= f.text_field :mouse %>
+  </div>
+  <div class="field">
+    <%= f.label :speaker %><br>
+    <%= f.text_field :speaker %>
+  </div>
+  <div class="field">
+    <%= f.label :spisan %><br>
+    <%= f.date_select :spisan, :prompt => { :day => 'День', :month => 'Месяц', :year => 'Год' } %>
+  </div>
+  <div class="field">
+    <%= f.label :spisan_txt %><br>
+    <%= f.text_area :spisan_txt %>
+  </div>
+
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+    <%= link_to 'Show', @hardware, :class => 'btn' %>
+    <%= link_to 'Back', hardwares_path, :class => 'btn' %>
+</span>
+<% end %>
+
+</div>

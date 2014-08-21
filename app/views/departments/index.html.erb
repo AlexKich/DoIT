@@ -1,0 +1,27 @@
+<h1>Listing departments</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Department name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @departments.each do |department| %>
+      <tr>
+        <td><%= department.department_name %></td>
+        <td><%= link_to '', department, :class => 'icon-eye-open' %></td>
+        <td><%= link_to '', edit_department_path(department), :class => 'icon-edit' %></td>
+        <td><%= link_to '', department, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'icon-remove' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Department', new_department_path, :class => 'btn' %>

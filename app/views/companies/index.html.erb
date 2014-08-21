@@ -1,0 +1,27 @@
+<h1>Listing companies</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Company name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+        <td><%= company.company_name %></td>
+        <td><%= link_to '', company, :class => 'icon-eye-open' %></td>
+        <td><%= link_to '', edit_company_path(company), :class => 'icon-edit' %></td>
+        <td><%= link_to '', company, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'icon-remove' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Company', new_company_path %>

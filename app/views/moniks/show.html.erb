@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Inv num:</strong>
+  <%= @monik.inv_num %>
+</p>
+
+<p>
+  <strong>By doc:</strong>
+  <%= @monik.by_doc %>
+</p>
+
+<p>
+  <strong>By price:</strong>
+  <%= @monik.by_price %>
+</p>
+
+<p>
+  <strong>Monitor name:</strong>
+  <%= @monik.monitor_name %>
+</p>
+
+<p>
+  <strong>Diagonal:</strong>
+  <%= @monik.diagonal %>
+</p>
+
+<p>
+  <strong>Spian:</strong>
+  <%= @monik.spian %>
+</p>
+
+<p>
+  <strong>Spisan txt:</strong>
+  <%= @monik.spisan_txt %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @monik.department.department_name %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @monik.company.company_name %>
+</p>
+
+<%= link_to 'Edit', edit_monik_path(@monik), :class => 'btn' %>
+<%= link_to 'Back', moniks_path, :class => 'btn' %>

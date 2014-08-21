@@ -1,0 +1,61 @@
+
+<h1>Listing hardwares</h1>
+<%= will_paginate %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Inv num</th>
+      <th>Company</th>
+      <th><%= link_to 'Department' %></th>
+      <th>By doc</th>
+      <th>By price</th>
+      <th>Model name</th>
+      <th>Notebook</th>
+      <th>Cpu</th>
+      <th>Memory</th>
+      <th>Hdd</th>
+      <th>Keyboard</th>
+      <th>Mouse</th>
+      <th>Speaker</th>
+      <th>Spisan</th>
+
+
+      <th></th>
+      <th></th>
+      <th></th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hardwares.each do |hardware| %>
+      <tr>
+        <td><%= hardware.inv_num %></td>
+        <td><%= hardware.company.company_name %></td>
+        <td><%= hardware.department.department_name %></td>
+        <td><%= hardware.by_doc %></td>
+        <td><%= hardware.by_price %></td>
+        <td><%= hardware.model_name %></td>
+        <td><%= hardware.notebook %></td>
+        <td><%= hardware.cpu %></td>
+        <td><%= hardware.memory %></td>
+        <td><%= hardware.hdd %></td>
+        <td><%= hardware.keyboard %></td>
+        <td><%= hardware.mouse %></td>
+        <td><%= hardware.speaker %></td>
+        <td><%= hardware.spisan %></td>
+
+
+
+        <td><%= link_to '', hardware, :class => 'icon-eye-open' %></td>
+        <td><%= link_to '', edit_hardware_path(hardware), :class => 'icon-edit' %></td>
+        <td><%= link_to '', hardware, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'icon-remove' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '', new_hardware_path, :class => 'icon-plus' %> add
+<%= will_paginate %>

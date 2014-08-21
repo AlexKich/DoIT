@@ -1,0 +1,55 @@
+<%= form_for(@monik) do |f| %>
+  <% if @monik.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@monik.errors.count, "error") %> prohibited this monik from being saved:</h2>
+
+      <ul>
+      <% @monik.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :inv_num %><br>
+    <%= f.text_field :inv_num %>
+  </div>
+  <div class="field">
+    <%= f.label :by_doc %><br>
+    <%= f.text_field :by_doc %>
+  </div>
+  <div class="field">
+    <%= f.label :by_price %><br>
+    <%= f.text_field :by_price %>
+  </div>
+  <div class="field">
+    <%= f.label :monitor_name %><br>
+    <%= f.text_field :monitor_name %>
+  </div>
+  <div class="field">
+    <%= f.label :diagonal %><br>
+    <%= f.number_field :diagonal %>
+  </div>
+  <div class="field">
+    <%= f.label :spian %><br>
+    <%= f.date_select :spian, :prompt => { :day => 'День', :month => 'Месяц', :year => 'Год' } %>
+  </div>
+  <div class="field">
+    <%= f.label :spisan_txt %><br>
+    <%= f.text_area :spisan_txt %>
+  </div>
+  <div class="field">
+    <%= f.label :department_id %><br>
+
+    <%= f.collection_select(:department_id, Department.order('department_name ASC'), :id, :department_name, include_blank: true) %>
+  </div>
+  <div class="field">
+    <%= f.label :company_id %><br>
+    <%= f.collection_select(:company_id, Company.order('company_name ASC'), :id, :company_name, include_blank: true) %>
+
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

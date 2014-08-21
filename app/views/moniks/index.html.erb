@@ -1,0 +1,43 @@
+<h1>Listing moniks</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Inv num</th>
+      <th>By doc</th>
+      <th>By price</th>
+      <th>Monitor name</th>
+      <th>Diagonal</th>
+      <th>Spian</th>
+      <th>Spisan txt</th>
+      <th>Department</th>
+      <th>Company</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @moniks.each do |monik| %>
+      <tr>
+        <td><%= monik.inv_num %></td>
+        <td><%= monik.by_doc %></td>
+        <td><%= monik.by_price %></td>
+        <td><%= monik.monitor_name %></td>
+        <td><%= monik.diagonal %></td>
+        <td><%= monik.spian %></td>
+        <td><%= monik.spisan_txt %></td>
+        <td><%= monik.department.department_name %></td>
+        <td><%= monik.company.company_name %></td>
+        <td><%= link_to '', monik, :class => 'icon-eye-open' %></td>
+        <td><%= link_to '', edit_monik_path(monik), :class => 'icon-edit' %></td>
+        <td><%= link_to '', monik, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'icon-remove' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Monik', new_monik_path, :class => 'btn' %>

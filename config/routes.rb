@@ -1,4 +1,16 @@
 SampleApp::Application.routes.draw do
+  resources :moniks
+
+  resources :coworkers
+
+  resources :departments
+
+  resources :companies
+
+  resources :hardwares do
+    get :index_department
+  end
+
   resources :users do
     member do
       get :following, :followers

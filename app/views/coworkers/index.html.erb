@@ -1,0 +1,33 @@
+<h1>Listing coworkers</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Coworker name</th>
+      <th>Location</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @coworkers.each do |coworker| %>
+      <tr>
+        <td><%= coworker.coworker_name %></td>
+        <td><%= coworker.location %></td>
+        <td><%= coworker.company.company_name %></td>
+        <td><%= coworker.department.department_name %></td>
+        <td><%= link_to '', coworker, :class => 'icon-eye-open' %></td>
+        <td><%= link_to '', edit_coworker_path(coworker), :class => 'icon-edit' %></td>
+        <td><%= link_to '', coworker, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'icon-remove' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Coworker', new_coworker_path, :class => 'btn' %>

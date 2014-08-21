@@ -1,0 +1,86 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Inv num:</strong>
+  <%= @hardware.inv_num %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @hardware.company.company_name %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @hardware.department_id %>
+</p>
+
+<p>
+  <strong>By doc:</strong>
+  <%= @hardware.by_doc %>
+<%= image_tag(@hardware.by_doc, height: '320', width: '320') %>
+
+</p>
+
+<p>
+  <strong>By price:</strong>
+  <%= @hardware.by_price %>
+</p>
+
+<p>
+  <strong>Model name:</strong>
+  <%= @hardware.model_name %>
+</p>
+
+<p>
+  <strong>Notebook:</strong>
+  <%= @hardware.notebook %>
+</p>
+
+<p>
+  <strong>Cpu:</strong>
+  <%= @hardware.cpu %>
+</p>
+
+<p>
+  <strong>Memory:</strong>
+  <%= @hardware.memory %>
+</p>
+
+<p>
+  <strong>Hdd:</strong>
+  <%= @hardware.hdd %>
+</p>
+
+<p>
+  <strong>Keyboard:</strong>
+  <%= @hardware.keyboard %>
+</p>
+
+<p>
+  <strong>Mouse:</strong>
+  <%= @hardware.mouse %>
+</p>
+
+<p>
+  <strong>Speaker:</strong>
+  <%= @hardware.speaker %>
+</p>
+
+<p>
+  <strong>Spisan:</strong>
+  <%= @hardware.spisan %>
+</p>
+
+<p>
+  <strong>Spisan txt:</strong>
+  <%= @hardware.spisan_txt %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @hardware.coworker.coworker_name %>
+</p>
+
+<%= link_to 'Edit', edit_hardware_path(@hardware), :class => 'btn' %>
+<%= link_to 'Back', hardwares_path, :class => 'btn' %>

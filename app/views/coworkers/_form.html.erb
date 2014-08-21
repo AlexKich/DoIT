@@ -1,0 +1,36 @@
+<%= form_for(@coworker) do |f| %>
+  <% if @coworker.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@coworker.errors.count, "error") %> prohibited this coworker from being saved:</h2>
+
+      <ul>
+      <% @coworker.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :coworker_name %><br>
+    <%= f.text_field :coworker_name %>
+  </div>
+  <div class="field">
+    <%= f.label :location %><br>
+    <%= f.text_field :location %>
+  </div>
+    <div class="field">
+      <%= f.label :company_id %><br>
+      <%= f.collection_select(:company_id, Company.order('company_name ASC'), :id, :company_name, include_blank: true) %>
+
+    </div>
+
+    <div class="field">
+      <%= f.label :department_id %><br>
+      <%= f.collection_select(:department_id, Department.order('department_name ASC'), :id, :department_name, include_blank: true) %>
+
+    </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
