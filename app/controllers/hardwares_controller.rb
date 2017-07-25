@@ -29,12 +29,12 @@ class HardwaresController < ApplicationController
   # POST /hardwares.json
   def create
     @hardware = Hardware.new(hardware_params)
-if params[:article].present?
- file = params[:article][:file]
- File.open(Rails.root.join('app','assets', 'images', file.original_filename), 'wb') do |f|
-  f.write(file.read)
- end
-end
+    if params[:article].present?
+      file = params[:article][:file]
+      File.open(Rails.root.join('app','assets', 'images', file.original_filename), 'wb') do |f|
+        f.write(file.read)
+        end
+    end
     respond_to do |format|
       if @hardware.save
         format.html { redirect_to @hardware, notice: 'Hardware was successfully created.' }
@@ -50,11 +50,11 @@ end
   # PATCH/PUT /hardwares/1.json
   def update
     if params[:article].present?
- file = params[:article][:file]
- File.open(Rails.root.join('app','assets', 'images', file.original_filename), 'wb') do |f|
-  f.write(file.read)
- end
-end
+      file = params[:article][:file]
+      File.open(Rails.root.join('app','assets', 'images', file.original_filename), 'wb') do |f|
+        f.write(file.read)
+      end
+    end
     respond_to do |format|
       if @hardware.update(hardware_params)
         format.html { redirect_to @hardware, notice: 'Hardware was successfully updated.' }

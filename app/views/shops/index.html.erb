@@ -1,0 +1,62 @@
+<h1>Список магазинов</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Номер</th>
+      <th>Короткое имя</th>
+      <th>Город</th>
+      <th>Улица</th>
+      <th>Строение</th>
+      <th>Дом</th>
+      <th>Этаж</th>
+      <th>Дата открытия</th>
+      <th>Дата закрытия</th>
+      
+      
+      <th>График работы</th>
+      <th>Провайдер</th>
+      <th>Телефон</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shops.each do |shop| %>
+      <tr>
+        <td><%= shop.number %></td>
+        <td><%= shop.name %></td>
+        <% if shop.town_id.present? then %>
+          <td><%= shop.town.town_name %></td>
+        <% end %>
+        <% if shop.street_id.present? then %>
+          <td><%= shop.street.street_name %></td>
+        <% end %>
+        <td><%= shop.bldg %></td>
+        <td><%= shop.housing %></td>
+        <td><%= shop.floor %></td>
+        <td><%= shop.date_start %></td>
+        <td><%= shop.date_end %></td>
+        
+        
+        <td><%= shop.business_hours %></td>
+        <% if shop.provider_id.present? then %>
+          <td><%= shop.provider.name_short %></td>
+        <% end %>
+        <td><%= shop.phone %></td>
+        <td><%= link_to 'Отчёт', shop_report_cleaning_path(shop.number) %></td>
+        <% if current_user.admin? %>
+          <td><%= link_to 'Edit', edit_shop_path(shop) %></td>
+          <td><%= link_to 'Destroy', shop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if current_user.admin? %>
+  <%= link_to 'New Shop', new_shop_path %>
+<% end %>

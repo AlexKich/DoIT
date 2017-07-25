@@ -1,0 +1,74 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @shop.number %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @shop.name %>
+</p>
+
+<p>
+  <strong>Town:</strong>
+  <%= @shop.town.town_name %>
+</p>
+
+<p>
+  <strong>Street:</strong>
+  <%= @shop.street.street_name %>
+</p>
+
+<p>
+  <strong>Bldg:</strong>
+  <%= @shop.bldg %>
+</p>
+
+<p>
+  <strong>Housing:</strong>
+  <%= @shop.housing %>
+</p>
+
+<p>
+  <strong>Floor:</strong>
+  <%= @shop.floor %>
+</p>
+
+<p>
+  <strong>Date start:</strong>
+  <%= @shop.date_start %>
+</p>
+
+<p>
+  <strong>Date end:</strong>
+  <%= @shop.date_end %>
+</p>
+
+<p>
+  <strong>Id hard:</strong>
+  <%= @shop.id_hard %>
+</p>
+
+<p>
+  <strong>Id stock:</strong>
+  <%= @shop.id_stock %>
+</p>
+
+<p>
+  <strong>Business hours:</strong>
+  <%= @shop.business_hours %>
+</p>
+<% if @shop.provider_id.present? then %>
+<p>
+  <strong>Id provider:</strong>
+  <%= @shop.provider.name_short %>
+</p>
+<% end %>
+<p>
+  <strong>Phone:</strong>
+  <%= @shop.phone %>
+</p>
+
+<%= link_to 'Edit', edit_shop_path(@shop) %> |
+<%= link_to 'Back', shops_path %>

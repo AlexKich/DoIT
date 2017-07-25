@@ -9,8 +9,29 @@
       <%= f.label :name %>
       <%= f.text_field :name %>
 
+      <%= f.label 'Имя' %>
+      <%= f.text_field :fio1 %>
+
+      <%= f.label 'Отчество' %>
+      <%= f.text_field :fio2 %>
+
+      <%= f.label 'Фамилия' %>
+      <%= f.text_field :fio3 %>
+
+      <%= @user.fio = @user.fio1 + ' ' + @user.fio2 %>
+
       <%= f.label :email %>
       <%= f.text_field :email %>
+      
+      <% if current_user.admin? %>
+
+        <%= f.label :cleaning %>
+        <%= f.text_field :cleaning %>
+
+        <%= f.label :admin %>
+        <%= f.text_field :admin %>
+
+      <% end %>
 
       <%= f.label :password %>
       <%= f.password_field :password %>

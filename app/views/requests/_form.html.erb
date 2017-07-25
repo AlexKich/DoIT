@@ -1,0 +1,80 @@
+<%= form_for(@request) do |f| %>
+  <% if @request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+
+      <ul>
+      <% @request.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :department, "Отдел" %><br>
+    <%= f.collection_select(:department, Department.order(:department_name, 'department_name ASC'), :id, :department_name) %>
+  </div>
+  <div class="field">
+    <%= f.label :reponsible, "Ответственный" %><br>
+    <%= f.collection_select(:reponsible, User.order(:fio, 'fio ASC'), :id, :fio) %>
+    
+  </div>
+  
+  <div class="field col-date">
+     <%= f.label 'Исполнить до' %>
+     
+     
+        <%= f.text_field :dedline, 'class' => 'datepicker' %>
+    
+     
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.datepicker').datepicker({
+            language: "ru"
+        });
+
+      });
+    </script>
+
+   <div class="field col-date">
+     <%= f.label 'Исполненно' %>
+     
+     
+        <%= f.text_field :dateend, 'class' => 'datepicker' %>
+    
+     
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.datepicker').datepicker({
+            language: "ru"
+        });
+
+      });
+    </script>
+  
+  <div class="field">
+    <%= f.label :subject, "Тема" %><br>
+    <%= f.text_field :subject %>
+  </div>
+  <div class="field">
+    <%= f.label :descr, "Описание" %><br>
+    <%= f.text_area :descr %>
+  </div>
+  <div class="field">
+    <%= f.label :author, "Автор" %><br>
+    <%= f.collection_select(:author, User.order(:fio, 'fio ASC'), :id, :fio) %>
+    
+  </div>
+  <div class="field">
+    <%= f.label :doc, "Документ" %><br>
+    <%= f.text_field :doc %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

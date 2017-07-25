@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @request.department %>
+</p>
+
+<p>
+  <strong>Reponsible:</strong>
+  <%= @request.reponsible %>
+</p>
+
+<p>
+  <strong>Dedline:</strong>
+  <%= @request.dedline %>
+</p>
+
+<p>
+  <strong>Dateend:</strong>
+  <%= @request.dateend %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @request.subject %>
+</p>
+
+<p>
+  <strong>Descr:</strong>
+  <%= @request.descr %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @request.author %>
+</p>
+
+<p>
+  <strong>Doc:</strong>
+  <%= @request.doc %>
+</p>
+
+<%= link_to 'Edit', edit_request_path(@request) %> |
+<%= link_to 'Back', requests_path %>

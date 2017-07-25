@@ -7,6 +7,9 @@
         <%= @user.name %>
       </h1>
     </section>
+    <% if current_user.admin? %>
+      <%= link_to "edit", edit_user_path(@user) %>
+    <% end %>
     <section>
       <%= render 'shared/stats' %>
     </section>

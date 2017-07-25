@@ -1,0 +1,95 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>user_id:</strong>
+  <%= @cleaning.user_id %>
+</p>
+
+<p>
+  <strong>Номер магазина:</strong>
+  <%= @shopnum.number %>
+</p>
+
+<p>
+  <strong>Дата проверки:</strong>
+  <%= @cleaning.date_check %>
+</p>
+
+<p>
+  <strong>Фамилия принимающего смену:</strong>
+  <%= @userstart.fio %>
+</p>
+
+<p>
+  <strong>Фамилия сдающего смену:</strong>
+  <%= @userend.fio%>
+</p>
+
+<p>
+  <strong>Проверяющий:</strong>
+  <%= @usercenzor.fio %>
+</p>
+
+<p>
+  <strong>Чистота полов:</strong>
+  <%= @cleaning.flooring %>
+</p>
+
+<p>
+  <strong>Чистота санузла:</strong>
+  <%= @cleaning.wc %>
+</p>
+
+<p>
+  <strong>Чистота витрин и стелажей:</strong>
+  <%= @cleaning.shelves %>
+</p>
+
+<p>
+  <strong>Чистота подсобных помещений:</strong>
+  <%= @cleaning.storeroom %>
+</p>
+
+<p>
+  <strong>Чистота территории у магазина:</strong>
+  <%= @cleaning.territory %>
+</p>
+
+<p>
+  <strong>Чистота хозяйственного инвентаря (ведра, швабры, тряпки):</strong>
+  <%= @cleaning.household_eq %>
+</p>
+
+<p>
+  <strong>Порядок в ящиках прилавка:</strong>
+  <%= @cleaning.orderinbox %>
+</p>
+
+<p>
+  <strong>Порядок в папках с документами:</strong>
+  <%= @cleaning.orderindoc %>
+</p>
+
+<p>
+  <strong>Выкладка товара:</strong>
+  <%= @cleaning.displayofgoods %>
+</p>
+
+<p>
+  <strong>Наличие ценников:</strong>
+  <%= @cleaning.price_tags %>
+</p>
+
+<p>
+  <strong>Чистота технического оборудования (комп., и т.д.):</strong>
+  <%= @cleaning.tech_eq %>
+</p>
+
+<p>
+  <strong>Остальный замечания:</strong>
+  <%= @cleaning.ostzam %>
+</p>
+
+<%= link_to 'Изменить', edit_cleaning_path(@cleaning), :class => 'btn btn-primary' %> 
+<%= link_to 'Сохранить', cleanings_path, :class => 'btn btn-primary' %>
+

@@ -88,7 +88,18 @@
   </div>
   <div class="field">
     <%= f.label :spisan %><br>
-    <%= f.date_select :spisan, :prompt => { :day => 'День', :month => 'Месяц', :year => 'Год' } %>
+	<%= f.text_field :spisan, 'class' => 'datepicker' %>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+		$('.datepicker').datepicker({
+			language: "ru"
+		});
+
+		});
+	</script>
+
+
   </div>
   <div class="field">
     <%= f.label :spisan_txt %><br>

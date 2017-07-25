@@ -1,0 +1,33 @@
+<h1>Listing chats 1</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>User post</th>
+      <th>User rev</th>
+      <th>Post read</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usersall.each do |usersall| %>
+      <tr>
+        <td><%= usersall.name %></td>
+        <td><%= @count_post[usersall.id] %></td>
+        
+        <td><%= link_to 'Show', @chat %></td>
+        <td><%= link_to 'Edit', root_path %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Chat', new_chat_path %>
+<%= link_to 'Chat', indexses_chats_path %>

@@ -1,0 +1,34 @@
+<h1>Список чатов</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>User post</th>
+      <th>User rev</th>
+      <th>Post read</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @chats.each do |chat| %>
+      <tr>
+        <td><%= chat.content %></td>
+        <td><%= chat.user_post %></td>
+        <td><%= chat.user_rev %></td>
+        <td><%= chat.post_read %></td>
+        <td><%= link_to 'Show', chat %></td>
+        <td><%= link_to 'Edit', edit_chat_path(chat) %></td>
+        <td><%= link_to 'Destroy', chat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Chat', new_chat_path %>
+

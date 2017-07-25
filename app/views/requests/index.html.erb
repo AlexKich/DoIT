@@ -1,0 +1,67 @@
+<h1>Список заявок</h1>
+
+<%= will_paginate %>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Номер</th>
+      <th>Отдел</th>
+      <th>Ответственный</th>
+      <th>Исполнить до</th>
+      <th>Выполненна</th>
+      <th>Тема</th>
+      <th>Описание</th>
+      <th>Автор</th>
+      <th>Doc</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @requests.each do |request| %>
+
+      <% if not request.dateend.nil? then %>
+            <%=  '<tr bgcolor="white">'.html_safe %>
+          <% else %>
+           <% if request.dedline < Time.now then %>
+             <%= '<tr bgcolor="red">'.html_safe %>
+          <%  end %>
+        <% end %>
+
+      
+        <td><%= request.id %></td>
+        <td><%= Department.find(request.department).department_name %></td>
+        <td><%= User.find(request.reponsible).fio %></td>
+        <% if request.dedline.nil? then
+                    @dedline = ""
+                  else
+                    @dedline = request.dedline.strftime('%d/%m/%y') 
+            end %>
+        <td><%= @deadline %></td>
+        <% if request.dateend.nil? then
+                    @dateend = ""
+                  else
+                    @dateend = request.dateend.strftime('%d/%m/%y') 
+            end %>
+        
+        <td><%= @dateend %></td>
+        <td><%= request.subject %></td>
+        <td><%= request.descr %></td>
+        <td><%= User.find(request.author).fio %></td>
+        <td><%= request.doc %></td>
+        <td><%= link_to 'Show', request %></td>
+        <td><%= link_to 'Edit', edit_request_path(request) %></td>
+        <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Request', new_request_path %>
+
+<%= will_paginate %>

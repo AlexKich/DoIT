@@ -6,14 +6,13 @@
     <%= form_for(:session, url: sessions_path) do |f| %>
 
       <%= f.label :email %>
-      <%= f.text_field :email %>
-
+      <%= f.collection_select(:email, User.order(:email, 'email ASC'), :email, :fio) %>
+     
       <%= f.label :password %>
       <%= f.password_field :password %>
 
       <%= f.submit "Войти", class: "btn btn-large btn-primary" %>
     <% end %>
 
-    <p>Новый пользователь? <%= link_to "Новый пользователь", signup_path %></p>
   </div>
 </div>

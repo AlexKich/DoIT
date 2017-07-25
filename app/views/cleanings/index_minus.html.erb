@@ -1,0 +1,94 @@
+<h3>Магазины с минусами</h3>
+
+
+<%= will_paginate %>
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Дата проверки</th>
+      <th>Маг.N</th>
+      <th>Принимающий магазин продавец</th>
+      <th>Сдавший магазин продавец</th>
+      <th>Фамилия проверяющего</th>
+      <th>Полов</th>
+      <th>Санузел</th>
+      <th>Полки</th>
+      <th>Подсобные помещения</th>
+      <th>Территории у магазина</th>
+      <th>Хоз. инвентарь (ведра, швабры, тряпки)</th>
+      <th>Порядок в ящиках прилавка</th>
+      <th>Порядок в папках с докум.</th>
+      <th>Выкладка товара</th>
+      <th>Наличие ценников</th>
+      <th>Чистота тех. оборуд. (комп., и т.д.)</th>
+      <th>Остальный замечания</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  
+  </thead>
+
+  <tbody>
+    <% @cleanings.each do |cleaning| %>
+      <tr>
+
+        <td><%= cleaning.date_check.strftime('%d/%m/%y') %></td>
+        <td><%= Shop.find(cleaning.shop_id).number %></td>
+        <td><%= User.find(cleaning.user_shop_start).fio %></td>
+        <td><%= User.find(cleaning.user_shop_end).fio %></td>
+        <td><%= User.find(cleaning.cenzor).fio %></td>
+        
+        <td class="colinplus"><%= cleaning.flooring %></td>
+
+        <td class="colinplus"><%= cleaning.wc %></td>
+        <td class="colinplus"><%= cleaning.shelves %></td>
+        <td class="colinplus"><%= cleaning.storeroom %></td>
+        <td class="colinplus"><%= cleaning.territory %></td>
+        <td class="colinplus"><%= cleaning.household_eq %></td>
+        <td class="colinplus"><%= cleaning.orderinbox %></td>
+        <td class="colinplus"><%= cleaning.orderindoc %></td>
+        <td class="colinplus"><%= cleaning.displayofgoods %></td>
+        <td class="colinplus"><%= cleaning.price_tags %></td>
+        <td class="colinplus"><%= cleaning.tech_eq %></td>
+     <% if cleaning.ostzam == '' or cleaning.ostzam == nil then
+                  @ost_zam = '+' 
+              else 
+                  @ost_zam = '-' 
+            end %>
+        <td class="colinplus"><%= @ost_zam %></td>
+        <% @count_minus = 0 %>
+          <% if cleaning.flooring == '-' then @count_minus += 1 end%>
+          <% if cleaning.wc == '-' then @count_minus += 1 end%>
+          <% if cleaning.shelves == '-' then @count_minus += 1  end%>
+          <% if cleaning.storeroom == '-' then @count_minus += 1 end%>          
+          <% if cleaning.territory == '-' then @count_minus += 1 end%>
+          <% if cleaning.household_eq == '-' then @count_minus += 1 end%>
+          <% if cleaning.orderinbox == '-' then @count_minus += 1 end%>
+          <% if cleaning.orderindoc == '-' then @count_minus += 1 end%>
+          <% if cleaning.displayofgoods == '-' then @count_minus += 1 end%>
+          <% if cleaning.price_tags == '-' then @count_minus += 1 end%>
+          <% if cleaning.tech_eq == '-' then @count_minus += 1 end%>
+          <% if @ost_zam == '-' then @count_minus += 1 end%>
+        <td class="minus-red">
+           <%= @count_minus %>
+        </td>  
+        <% if current_user.cleaning == 1 or current_user.admin? %>
+          <td><%= link_to '', cleaning, :class => 'icon-eye-open' %></td>
+        <% end %>
+        <% if current_user.admin? %>
+        
+        <td><%= link_to '', edit_cleaning_path(cleaning), :class => 'icon-edit' %></td>
+        <td><%= link_to '', cleaning, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'icon-remove' %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Назад', cleanings_path, :class => 'btn btn-primary' %>
+<%= will_paginate %>

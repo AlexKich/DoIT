@@ -3,42 +3,108 @@
     <div class="container-fluid">
       <%= link_to "DoIT", root_path, id: "logo" %>
       <nav>
+      <% if signed_in? %>
+        <button class="btn">
+        <%= current_user.fio %>  
+        </button>
+      <% end %>
+            
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Help", help_path %></li>
           <% if signed_in? %>
-            <li><%= link_to "Users", users_path %></li>
+              <% if current_user.admin? %>
+                    <li><%= link_to "Users", users_path %></li>
 
+                      <li id="fat-menu" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                          Hardware <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><%= link_to "Hardware", hardwares_path %></li>
+                          <li><%= link_to "Monitor", moniks_path %></li>
+                          <li class="divider"></li>
+                          <li><%= link_to "Co-worker", coworkers_path %></li>
+                          <li><%= link_to "Company", companies_path %></li>
+                          <li><%= link_to "Department", departments_path %></li>
+
+                        </ul>
+                      </li>
+
+                  <li><%= link_to "Чат", indexses_chats_path %></li>
+                    <li id="fat-menu" class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Account <b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><%= link_to "Профиль", current_user %></li>
+                        <li><%= link_to "Настройки", edit_user_path(current_user) %></li>
+                        <li class="divider"></li>
+                        <li><%= link_to "Новый пользователь", signup_path %></li>
+                      </ul>
+                    </li>
+                <% end %>
+
+                <li><%= link_to "Заявки", requests_path %></li>
               <li id="fat-menu" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  Hardware <b class="caret"></b>
+                  Магазины <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><%= link_to "Hardware", hardwares_path %></li>
-                  <li><%= link_to "Monitor", moniks_path %></li>
-                  <li class="divider"></li>
-                  <li><%= link_to "Co-worker", coworkers_path %></li>
-                  <li><%= link_to "Company", companies_path %></li>
-                  <li><%= link_to "Department", departments_path %></li>
+                  <li><%= link_to "Чистота залог здоровья", cleanings_path %></li>
+                  
+                    <% if current_user.cleaning == 1 %>
+                        <li class="divider"></li>
+                        <li><%= link_to "Список магазинов", shops_path %></li>
+                    <% end %>
+                    <% if current_user.admin? %>
+                    <li><%= link_to "Статистика", '#' %></li>
+                        <li class="divider"></li>
+                        <li><%= link_to "Магазины", shops_path %></li>
+                      <li><%= link_to "Провайдер", providers_path %></li>
+                      <li><%= link_to "Инвентарь", stocks_path %></li>
+                    <% end %>
+
+                    <% if current_user.cleaning < 2 %>
+                        <li class="divider"></li>
+                        <li class="dropdown-submenu">
+                          <a tabindex="-1" href="#">Отчёты</a>
+                            <ul class="dropdown-menu">
+                              <li><%= link_to "Отчёт по магазинам", shops_path %></li>
+                              
+                            </ul>
+                        </li>
+                      
+                    <% end %>
+
 
                 </ul>
               </li>
 
 
-            <li id="fat-menu" class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Account <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li><%= link_to "Профиль", current_user %></li>
-                <li><%= link_to "Настройки", edit_user_path(current_user) %></li>
-                <li class="divider"></li>
-                <li><%= link_to "Новый пользователь", signup_path %></li>
+
+
+
+
+                <% if current_user.admin? %>
+                  <li id="fat-menu" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      Настройки <b class="caret"></b>
+                    </a>
+                      <ul class="dropdown-menu">
+                        <li><%= link_to "Города", towns_path %></li>
+                        <li><%= link_to "Улицы", streets_path %></li>
+                        <li><%= link_to "Провайдер", moniks_path %></li>
+                        <li class="divider"></li>
+                      </ul>
+                  </li>
+                <% end %>
+              
                 <li>
                   <%= link_to "Выход", signout_path, method: "delete" %>
                 </li>
-              </ul>
-            </li>
+
+
           <% else %>
             <li><%= link_to "Вход", signin_path %></li>
           <% end %>

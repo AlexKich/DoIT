@@ -1,0 +1,73 @@
+<%= form_for(@shop) do |f| %>
+  <% if @shop.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@shop.errors.count, "error") %> prohibited this shop from being saved:</h2>
+
+      <ul>
+      <% @shop.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :number %><br>
+    <%= f.number_field :number %>
+  </div>
+  <div class="field">
+    <%= f.label 'Наименование' %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label 'Город' %><br>
+    <%= f.collection_select(:town_id, Town.order('town_name ASC'), :id, :town_name, include_blank: true) %>
+  </div>
+  <div class="field">
+    <%= f.label 'Улица' %><br>
+    <%= f.collection_select(:street_id, Street.order('street_name ASC'), :id, :street_name, include_blank: true) %>
+  </div>
+  <div class="field">
+    <%= f.label 'Дом' %><br>
+    <%= f.text_field :bldg %>
+  </div>
+  <div class="field">
+    <%= f.label 'Строение' %><br>
+    <%= f.text_field :housing %>
+  </div>
+  <div class="field">
+    <%= f.label 'Этаж' %><br>
+    <%= f.text_field :floor %>
+  </div>
+  <div class="field">
+    <%= f.label 'Дата открытия' %><br>
+    <%= f.date_select :date_start, :order => [:day, :month, :year] %>
+  </div>
+  <div class="field">
+    <%= f.label 'Дата закрытия' %><br>
+    <%= f.date_select :date_end, :order => [:day, :month, :year] %>
+  </div>
+  <div class="field">
+    <%= f.label :id_hard %><br>
+    <%= f.number_field :id_hard %>
+  </div>
+  <div class="field">
+    <%= f.label :id_stock %><br>
+    <%= f.number_field :id_stock %>
+  </div>
+  <div class="field">
+    <%= f.label 'Время работы' %><br>
+    <%= f.text_field :business_hours %>
+  </div>
+  <div class="field">
+    <%= f.label 'Провайдер' %><br>
+    <%= f.collection_select(:provider_id, Provider.order('name_short ASC'), :id, :name_short, include_blank: true) %>
+  </div>
+  <div class="field">
+    <%= f.label 'Телефон' %><br>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

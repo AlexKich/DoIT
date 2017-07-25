@@ -1,0 +1,164 @@
+<%= form_for(@cleaning) do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+  <% if @cleaning.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cleaning.errors.count, "error") %> prohibited this cleaning from being saved:</h2>
+
+      <ul>
+      <% @cleaning.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	<div class="row-fluid">
+	<div class="span4">
+
+    <div class="field col-date">
+	   <%= f.label 'Дата проверки' %>
+	   
+     <% if current_user.admin? %>
+        <%= f.text_field :date_check, 'class' => 'datepicker', value: Time.now %>
+      <% else %>
+        <%= f.hidden_field :date_check, value: Time.now %>
+     <% end %>
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.datepicker').datepicker({
+            language: "ru"
+        });
+
+      });
+    </script>
+
+    <div class="field">
+    <%= f.label '№ магазина' %>
+    <%= f.collection_select(:shop_id, Shop.order(:number, 'name ASC'), :id, :number) %>
+    </div>
+</div>
+
+<div class="row-fluid">
+<ul class="nav nav-tabs nav-stacked">
+  <div class="span12">
+  <div class="span4">
+    <div class="field col-fio">
+    <%= f.label 'Фамилия принимающего магазин продавца' %>
+    <% if current_user.admin? %>
+      <%= f.collection_select(:user_shop_start, User.order(:fio3, 'name ASC'), :id, :fio, prompt: true ) %>
+
+        <% else %>
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+          <% if current_user.cleaning == 2 %>
+            <%= f.text_field :user_shop_start, :value => current_user.fio %>
+            <%= f.hidden_field :user_shop_start, :value => current_user.id %>
+          <% else %>
+            <%= f.collection_select(:user_shop_start, User.order(:fio3, 'name ASC').where(cleaning: 2), :id, :fio, prompt: true ) %>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="span4">
+    <div class="field col-fio">
+    <% if current_user.cleaning == 2 or current_user.admin? %>
+
+      <%= f.label 'Фамилия сдавшего магазин продавца' %>
+      <%= f.collection_select(:user_shop_end, User.order(:fio3, 'name ASC').where(cleaning: 2), :id, :fio, prompt: true) %>
+    <% else %>  
+      <%= f.hidden_field :user_shop_end, :value => '0' %>
+    <% end %>
+    </div>
+  </div>
+  <div class="span4">
+    <div class="field col-fio">
+     
+      <% if current_user.admin? %>
+          <%= f.collection_select(:cenzor, User.order(:fio3, 'name ASC'), :id, :fio, prompt: true) %>
+        <% else %>
+        <% if current_user.cleaning == 2 %>
+          <%= f.hidden_field :cenzor, :value => '0' %>
+          <% else %>
+            <%= f.label 'Фамилия проверяющего' %>
+              <%= f.text_field :cenzor, :value => current_user.fio %>
+              <%= f.hidden_field :cenzor, :value => current_user.id %>
+        <% end %>
+      <% end %>
+
+    </div>
+  </div>
+</ul>
+</div>
+
+<div class="row-fluid">
+  <div class="span4">
+
+    <div class="field">
+      <%= f.label 'Чистота полов' %>
+      <%= f.select :flooring, [['+', "+"], ['-', "-"]] %>
+    </div>
+    <div class="field">
+      <%= f.label 'Чистота санузла' %>
+      <%= f.select :wc, [['+', "+"], ['-', "-"]] %>
+    </div>
+    <div class="field">
+      <%= f.label 'Чистота на полках' %>
+      <%= f.select :shelves, [['+', "+"], ['-', "-"]] %>
+    </div>
+    <div class="field">
+      <%= f.label 'Чистота подсобных помещений' %>
+      <%= f.select :storeroom, [['+', "+"], ['-', "-"]] %>
+    </div>
+  </div>
+
+	<div class="span4">
+
+    <div class="field">
+      <%= f.label 'Чистота территории у магазина' %>
+      <%= f.select :territory, [['+', "+"], ['-', "-"]] %>
+    </div>
+    <div class="field">
+      <%= f.label 'Чистота хоз. инвентаря (вёдра, швабры, тряпки)' %>
+      <%= f.select :household_eq, [['+', "+"], ['-', "-"]] %>
+    </div>
+    <div class="field">
+      <%= f.label 'Порядок в ящиках прилавка' %>
+      <%= f.select :orderinbox, [['+', "+"], ['-', "-"]] %>
+    </div>
+    <div class="field">
+      <%= f.label 'Порядок в папках с документами' %>
+      <%= f.select :orderindoc, [['+', "+"], ['-', "-"]] %>
+    </div>
+  </div>
+
+	<div class="span4">
+
+    <div class="field">
+      <%= f.label 'Выкладка товара' %>
+      <%= f.select :displayofgoods, [['+', "+"], ['-', "-"]] %>
+    </div>
+    <div class="field">
+      <%= f.label 'Наличие ценников' %>
+      <%= f.select :price_tags, [['+', "+"], ['-', "-"]] %>
+    </div>
+    <div class="field">
+      <%= f.label 'Чистота технического оборудования' %>
+      <%= f.select :tech_eq, [['+', "+"], ['-', "-"]] %>
+    </div>
+     <div class="field">
+      <%= f.label 'Остальные замечания' %>
+      <%= f.text_field :ostzam %>
+    </div>
+	</div>
+
+
+
+	<div class="row-fluid">
+    <div class="span12">
+      <div class="actions">
+        <%= f.submit 'Сохранить' %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

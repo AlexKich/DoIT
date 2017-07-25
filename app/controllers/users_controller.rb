@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.paginate(page: params[:page]).order(name: :asc)
   end
 
   def show
@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.fio = @user.fio3 + ' ' + @user.fio1.slice(0) + '. ' + @user.fio2.slice(0) + '.'
     if @user.save
       sign_in @user
       flash[:success] = "Welcome to the IT-base!"
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user.fio = @user.fio3 + ' ' + @user.fio1.slice(0) + '. ' + @user.fio2.slice(0) + '.'
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
       redirect_to @user
@@ -63,15 +65,20 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+
+      params.require(:user).permit(:name, :email, :password, :fio, :fio1, :fio2, :fio3,
+                                   :password_confirmation, :cleaning)
     end
 
     # Before filters
 
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
+      if current_user.admin?
+      else
+       redirect_to(root_url) unless current_user?(@user) 
+      end
+      
     end
 
     def admin_user

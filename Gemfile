@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.1.2'
+ruby '2.3.1'
 #ruby-gemset=railstutorial_rails_4_0
 
-gem 'rails', '4.0.8'
+gem 'rails'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'sprockets', '2.11.0'
 gem 'bcrypt-ruby', '3.1.2'
@@ -10,10 +10,14 @@ gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'paperclip'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap-datepicker-rails', '>= 0.6.21'
+# gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 
 group :development, :test do
-  gem 'mysql2'
-  gem 'rspec-rails', '2.13.1'
+  gem 'mysql2', '~> 0.3.18'
+  gem 'rspec-rails'
+#, '2.13.1'
   # The following optional lines are part of the advanced setup.
   gem 'guard-rspec', '2.5.0'
   gem 'spork-rails', '4.0.0'
@@ -52,6 +56,6 @@ group :doc do
 end
 
 group :production do
-  gem 'pg', '0.15.1'
+  # gem 'pg'
   gem 'rails_12factor', '0.0.2'
 end
